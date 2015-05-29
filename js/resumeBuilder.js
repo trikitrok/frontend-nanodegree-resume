@@ -31,9 +31,8 @@ var bio = {
   contacts: {
     "mobile": "619492805",
     "email": "trikitrok@gmail.com",
+    "github": "trikitrok",
     "twitter": "@trikitrok",
-    "github": "https://github.com/trikitrok",
-    "blog": "http://garajeando.blogspot.com.es/",
     "location": "Barcelona",
   },
   picture: "../images/fry.jpg",

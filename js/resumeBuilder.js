@@ -112,7 +112,7 @@ var education = {
 
           $(".education-entry:last")
             .append(
-              generateEducationLink(
+              generateLink(
                 HTMLonlineTitle,
                 HTMLonlineSchool,
                 onlineCourse.url,
@@ -135,7 +135,7 @@ var education = {
 
           $educationEntry = $(".education-entry:last")
             .append(
-              generateEducationLink(
+              generateLink(
                 HTMLschoolName,
                 HTMLschoolDegree,
                 school.url,
@@ -160,6 +160,48 @@ var education = {
   }
 };
 
+var work = {
+  "jobs": [{
+    "employer": "Runroom",
+    "title": "Software Developer",
+    "location": "Barcelona",
+    "dates": "February 2014 - February 2015",
+    "description": "Backend development in Python and PHP"
+  }, {
+    "employer": "Barcelona Supercomputing Center",
+    "title": "Software Developer",
+    "location": "Barcelona",
+    "dates": "May 2010 - January 2014",
+    "description": "Worked in a team that was developing an object oriented protein energy landscape exploration simulator using C++."
+  }],
+  display: function() {
+    this.jobs.forEach(
+      function(job) {
+        $("#workExperience").append(HTMLworkStart);
+
+        $(".work-entry:last")
+          .append(
+            generateLink(
+              HTMLworkEmployer,
+              HTMLworkTitle,
+              "#",
+              job.employer,
+              job.title)
+          )
+          .append(
+            HTMLworkDates.replace(dataPlaceHolder, job.dates)
+          )
+          .append(
+            HTMLworkLocation.replace(dataPlaceHolder, job.location)
+          )
+          .append(
+            HTMLworkDescription.replace(dataPlaceHolder, job.description)
+          );
+      }
+    );
+  }
+}
 
 bio.display();
 education.display();
+work.display();

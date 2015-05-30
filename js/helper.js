@@ -66,7 +66,7 @@ Variables and functions that I added to remove some duplication from resumeBuild
 */
 var dataPlaceHolder = "%data%";
 
-function generateEducationLink(generalTemplate, specificTemplate, url, general, specific) {
+function generateLink(generalTemplate, specificTemplate, url, general, specific) {
   return generalTemplate.replace("#", url).replace("%data%", general) +
     specificTemplate.replace("%data%", specific);
 }

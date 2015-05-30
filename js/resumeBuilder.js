@@ -1,76 +1,74 @@
 "use strict";
 
-function formatElements(template, substitutions) {
-  var i,
-    substitution,
-    res = template;
-
-  for (i = 0; i < substitutions.length; i++) {
-    substitution = substitutions[i];
-    res = res.replace(substitution.placeHolder, substitution.value);
-  }
-
-  return res;
-}
-
-function appendFormattedElement(nodeSelector, template, substitutions) {
-  $(nodeSelector).append(
-    formatElements(template, substitutions)
-  );
-}
-
-function prependFormattedElement(nodeSelector, template, substitutions) {
-  $(nodeSelector).prepend(
-    formatElements(template, substitutions)
-  );
-}
-
 var bio = {
-  name: "Manuel Rivero",
-  role: "Web Developer",
-  contacts: {
+  "name": "Manuel Rivero",
+  "role": "Web Developer",
+  "contacts": {
     "mobile": "619492805",
     "email": "trikitrok@gmail.com",
     "github": "trikitrok",
     "twitter": "@trikitrok",
     "location": "Barcelona",
   },
-  picture: "../images/fry.jpg",
-  skills: [
+  "welcomeMessage": "Si la vida no me sonrie, yo le hago cosquillitas",
+  "skills": [
     "awesomeness",
     "delivering things",
     "caring"
   ],
-  message: "Si la vida no me sonrie, yo le hago cosquillitas"
+  "biopic": "images/fry.jpg",
+  display: function() {
+    var self = this,
+      datePlaceHolder = "%data%";
+
+    displayRole();
+    displayName();
+    displayBiopic();
+    displayWelcomeMessage();
+    displayContactsAt("#topContacts");
+    displaySkills();
+    displayContactsAt("#footerContacts");
+
+    function displayWelcomeMessage() {
+      $("#header").append(
+        HTMLwelcomeMsg.replace(datePlaceHolder, self.welcomeMessage)
+      );
+    }
+
+    function displayBiopic() {
+      $("#header").append(HTMLbioPic.replace(datePlaceHolder, self.biopic));
+    }
+
+    function displaySkills() {
+      var i;
+
+      $("#header").append(HTMLskillsStart);
+
+      for (i = 0; i < self.skills.length; i++) {
+        $("#skills").append(
+          HTMLskills.replace(datePlaceHolder, self.skills[i])
+        );
+      }
+    }
+
+    function displayRole() {
+      $("#header").prepend(HTMLheaderRole.replace(datePlaceHolder, self.role));
+    }
+
+    function displayName() {
+      $("#header").prepend(HTMLheaderName.replace(datePlaceHolder, self.name));
+    }
+
+    function displayContactsAt(location) {
+      for (var contactType in self.contacts) {
+        $(location).append(
+          HTMLcontactGeneric
+          .replace("%contact%", contactType)
+          .replace(datePlaceHolder, self.contacts[contactType])
+        );
+      }
+    }
+  }
 };
 
-prependFormattedElement(
-  "#header", HTMLheaderRole, [{
-    placeHolder: "%data%",
-    value: bio.role
-  }]
-);
-
-prependFormattedElement(
-  "#header", HTMLheaderName, [{
-    placeHolder: "%data%",
-    value: bio.name
-  }]
-);
-
-function addContacts() {
-  for (var contactType in bio.contacts) {
-    appendFormattedElement(
-      "#topContacts",
-      HTMLcontactGeneric, [{
-        placeHolder: "%contact%",
-        value: contactType
-      }, {
-        placeHolder: "%data%",
-        value: bio.contacts[contactType]
-      }]
-    );
-  }
-}
-
-addContacts();
+bio.display();

@@ -202,6 +202,48 @@ var work = {
   }
 }
 
+var projects = {
+  "projects": [{
+    "title": "Glowworm++",
+    "url": "https://bitbucket.org/trikitrok/glowworm/overview",
+    "dates": "2013 - Present day",
+    "description": "Glowworm++ is a C++ implementation of the Glowworm Swarm Optimization algorithm (http://dl.acm.org/citation.cfm?id=1542054)",
+    "images": ["images/197x148.gif", "images/197x148.gif"]
+  }],
+
+  display: function() {
+    this.projects.forEach(
+      function(project) {
+        var $projectEntry;
+
+        $("#projects").append(HTMLprojectStart);
+
+        $projectEntry = $(".project-entry:last")
+          .append(
+            HTMLprojectTitle
+            .replace(dataPlaceHolder, project.title)
+            .replace("#", project.url)
+          )
+          .append(
+            HTMLprojectDates.replace(dataPlaceHolder, project.dates)
+          )
+          .append(
+            HTMLprojectDescription.replace(dataPlaceHolder, project.description)
+          );
+
+        project.images.forEach(
+          function(image) {
+            $projectEntry.append(
+              HTMLprojectImage.replace(dataPlaceHolder, image)
+            );
+          }
+        );
+      }
+    );
+  }
+};
+
 bio.display();
 education.display();
 work.display();
+projects.display();

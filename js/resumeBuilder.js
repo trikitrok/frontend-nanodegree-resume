@@ -101,6 +101,31 @@ var education = {
     var self = this;
 
     displaySchools();
+    displayOnlineSchools();
+
+    function displayOnlineSchools() {
+      $("#education").append(HTMLonlineClasses);
+
+      self.onlineCourses.forEach(
+        function displayOnlineCourse(onlineCourse) {
+          $("#education").append(HTMLschoolStart);
+
+          $(".education-entry:last")
+            .append(
+              generateEducationLink(
+                HTMLonlineTitle,
+                HTMLonlineSchool,
+                onlineCourse.url,
+                onlineCourse.title,
+                onlineCourse.school)
+            ).append(
+              HTMLschoolDates.replace(dataPlaceHolder, onlineCourse.date)
+            ).append(
+              HTMLonlineURL.replace(dataPlaceHolder, onlineCourse.url)
+            );
+        }
+      );
+    }
 
     function displaySchools() {
       self.schools.forEach(

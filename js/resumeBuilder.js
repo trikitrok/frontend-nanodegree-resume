@@ -39,8 +39,6 @@ var bio = {
     }
 
     function displaySkills() {
-      // var i;
-
       $("#header").append(HTMLskillsStart);
 
       self.skills.forEach(
@@ -50,11 +48,6 @@ var bio = {
           );
         }
       );
-      // for (i = 0; i < self.skills.length; i++) {
-      //   $("#skills").append(
-      //     HTMLskills.replace(dataPlaceHolder, self.skills[i])
-      //   );
-      // }
     }
 
     function displayRole() {
@@ -129,19 +122,15 @@ var education = {
               HTMLschoolLocation.replace(dataPlaceHolder, school.location)
             );
 
-          displayMajorsAt($educationEntry, school.majors);
+          school.majors.forEach(
+            function displayMajor(major) {
+              $educationEntry.append(
+                HTMLschoolMajor.replace(dataPlaceHolder, major)
+              );
+            }
+          );
         }
       );
-
-      function displayMajorsAt($location, majors) {
-        majors.forEach(
-          function displayMajor(major) {
-            $location.append(
-              HTMLschoolMajor.replace(dataPlaceHolder, major)
-            );
-          }
-        );
-      }
     }
   }
 };

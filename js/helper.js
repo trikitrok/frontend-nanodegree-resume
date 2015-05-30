@@ -61,6 +61,15 @@ var HTMLonlineURL = '<br><a href="#">%data%</a>';
 var internationalizeButton = '<button>Internationalize</button>';
 var googleMap = '<div id="map"></div>';
 
+/*
+Variables and functions that I added to remove some duplication from resumeBuilder.js
+*/
+var dataPlaceHolder = "%data%";
+
+function generateEducationLink(generalTemplate, specificTemplate, url, general, specific) {
+  return generalTemplate.replace("#", url).replace("%data%", general) +
+    specificTemplate.replace("%data%", specific);
+}
 
 /*
 The International Name challenge in Lesson 2 where

@@ -139,6 +139,14 @@ ul {
   list-style-type: none;
 }
 
+.jobs-in-location-content ul {
+  list-style-type: circle;
+}
+
+.jobs-in-location-content li {
+  padding-left: 5px;
+}
+
 .biopic {
   float: left;
   padding: 10px;

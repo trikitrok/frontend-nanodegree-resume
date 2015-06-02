@@ -183,9 +183,53 @@ function initializeMap() {
       content: name
     });
 
-    // hmmmm, I wonder what this is about...
+    // Click on marker event handler
     google.maps.event.addListener(marker, 'click', function() {
-      // your code goes here!
+      var locationName = extractLocationNameFrom(name),
+        jobsInLocationContent = createJobsInLocationContent(
+          locationName,
+          getJobsInLocation(locationName)
+        ),
+        jobsInLocationWindow = new google.maps.InfoWindow({
+          content: jobsInLocationContent
+        });
+
+      jobsInLocationWindow.open(marker.get('map'), marker);
+
+      function createJobsInLocationContent(locationName, allJobsInLocation) {
+        var content = '<div class="jobs-in-location-content">';
+        content += "<b>Jobs in </b>" + locationName + ": ";
+        content += createJobsList(allJobsInLocation);
+        content += "</div>";
+        return content;
+
+        function createJobsList(allJobsInLocation) {
+          var listHtml = "";
+
+          if (allJobsInLocation.length === 0) {
+            listHtml = "None yet.";
+            return listHtml;
+          }
+
+          listHtml += "<br>";
+          listHtml += "<ul>"
+          allJobsInLocation.forEach(
+            function(job) {
+              listHtml += "<li>" + job.title + " at " + job.employer + "</li>";
+            }
+          );
+          listHtml += "</ul>";
+          return listHtml;
+        }
+      }
+
+      function getJobsInLocation(locationName) {
+        return work.getAllJobsInLocation(locationName);
+      }
+
+      function extractLocationNameFrom(location) {
+        return location.split(",")[0];
+      }
     });
 
     // this is where the pin actually gets added to the map.
@@ -253,6 +297,6 @@ window.addEventListener('load', initializeMap);
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
 window.addEventListener('resize', function(e) {
-// Make sure the map bounds get updated on page resize
- map.fitBounds(mapBounds);
+  // Make sure the map bounds get updated on page resize
+  map.fitBounds(mapBounds);
 });

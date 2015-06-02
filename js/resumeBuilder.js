@@ -215,6 +215,18 @@ work.display = function() {
   );
 };
 
+work.getAllJobsInLocation = function(locationName) {
+  var jobsInLocation = [];
+  this.jobs.forEach(
+    function(job) {
+      if(job.location === locationName) {
+        jobsInLocation.push(job);
+      }
+    }
+  );
+  return jobsInLocation;
+};
+
 projects.display = function() {
   this.projects.forEach(
     function(project) {

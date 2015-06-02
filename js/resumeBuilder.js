@@ -4,11 +4,11 @@ var bio = {
   "name": "Manuel Rivero",
   "role": "Web Developer",
   "contacts": {
-    "mobile": "619492805",
+    "mobile": "666666666",
     "email": "trikitrok@gmail.com",
     "github": "trikitrok",
     "twitter": "@trikitrok",
-    "location": "Barcelona",
+    "location": "Barcelona"
   },
   "welcomeMessage": "Si la vida no me sonrie, yo le hago cosquillitas",
   "skills": [

@@ -254,5 +254,6 @@ projects.display();
 appendMap();
 
 function appendMap() {
-  $("#main").append(googleMap);
+  $("#mapDiv").append(googleMap);
+  initializeMap();
 }

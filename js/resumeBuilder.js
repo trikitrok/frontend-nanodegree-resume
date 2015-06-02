@@ -247,3 +247,9 @@ bio.display();
 education.display();
 work.display();
 projects.display();
+
+appendMap();
+
+function appendMap() {
+  $("#main").append(googleMap);
+}
